@@ -404,7 +404,7 @@
 				WWOBJLoader2Example.prototype.getHexSpe = function() {
 					var scope = this;
 					var colors;
-					if(scope.loader) {
+					if(scope.loader && scope.pivot.children[0].material[0].type == 'MeshPhongMaterial') {
 						scope.pivot.children[0].material.forEach(element => {
 							colors = element.specular.getHex();
 						});
@@ -417,9 +417,9 @@
 
 				WWOBJLoader2Example.prototype.setHexSpe = function(num) {
 					var scope = this;
-					if(scope.loader) {
+					if(scope.loader && scope.pivot.children[0].material[0].type =='MeshPhongMaterial') {
 						scope.pivot.children[0].material.forEach(element => {
-							element.specular = num;
+							element.specular.setHex(num);
 						});
 					} else {
 						return false;
@@ -531,8 +531,8 @@
 				app.setHex(value);
 			})
 
-			var controlColor = folderOptions.addColor(wwObjLoader2Control, 'specular').name('specular');
-			controlColor.onChange(function(value) {
+			var controlColorSpe = folderOptions.addColor(wwObjLoader2Control, 'specular').name('specular');
+			controlColorSpe.onChange(function(value) {
 				app.setHexSpe(value);
 			})
 
